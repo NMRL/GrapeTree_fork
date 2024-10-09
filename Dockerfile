@@ -41,6 +41,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Changing ownership as root user
 USER root
 RUN chown -R appuser /app
+RUN chmod -R 775 /app
 
 # Switch to the non-privileged user to run the application.
 USER appuser
