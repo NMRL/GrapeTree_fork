@@ -66,7 +66,7 @@ def main() :
             parser = argparse.ArgumentParser(description=desc, epilog=epi)
             args = parser.parse_args()
             open_browser(app.config.get('PORT'))
-            app.run(port=app.config.get('PORT'))
+            app.run(host='0.0.0.0', port=app.config.get('PORT'))
             sys.exit(0)
         except KeyboardInterrupt as e:  # Ctrl-C
             raise e
