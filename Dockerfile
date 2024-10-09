@@ -41,7 +41,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Changing ownership as root user
 USER root
 RUN chown -R appuser /app
-RUN chmod -R 775 /app
+# Required to work properly in OpenShift
+RUN chmod -R 775 /app 
 
 # Switch to the non-privileged user to run the application.
 USER appuser
@@ -49,10 +50,13 @@ USER appuser
 # Copy the source code into the container.
 COPY . .
 
+# Copy Gunicorn configuration file
+COPY gunicorn.conf.py /app/gunicorn.conf.py
+
 # Expose the port that the application listens on.
 EXPOSE 8000
 
 # Run the application.
-# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "module:app"]
-CMD python grapetree.py
-# while true; do sleep 5; done
+CMD ["gunicorn", "module:app", "-c", "/app/gunicorn.conf.py"]
+# Debugging mode
+# CMD python grapetree.py
