@@ -8,7 +8,7 @@ threads = 2  # Number of threads per worker
 # Logging
 accesslog = '-'  # Log access to stdout
 errorlog = '-'  # Log errors to stdout
-loglevel = 'info'
+loglevel = 'warning'
 
 # Security
 # worker_tmp_dir = '/dev/shm'  # Uncomment if using a tmpfs mount for security/performance
